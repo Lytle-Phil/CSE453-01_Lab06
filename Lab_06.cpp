@@ -81,31 +81,63 @@ bool weakMitigation(string username, string password){
 int main(){
     
     // TEST CASE 1
-    string usernameTest01 = "JohnDoe";
-    string passwordTest01 = "na' OR 'x' = 'x";
+    string usernameTestNoAttack = "John";
+    string passwordTestNoAttack = "password";
     cout << endl
          << "TEST CASE 01" << endl
 		 << "------------" << endl
-		 << "Type of attack: Tautology" << endl
-         << "Mitigation: None" << endl
-         << "Expected Result: The system will not detect the attack." <<endl << endl;
-        generateSQLStatement(usernameTest01, passwordTest01);
+		 << "Type of attack: None" << endl
+         << "Mitigation: Weak" << endl
+         << "Expected Result: There is no attack so there should be no attack detected." 
+         <<endl << endl;
+        if(weakMitigation(usernameTestNoAttack, passwordTestNoAttack))
+            generateSQLStatement(usernameTestNoAttack, passwordTestNoAttack);
+        else
+            cout << "Attack detected" << endl;
     // END OF TEST CASE 1
 
     // TEST CASE 2
-    string usernameTest02 = "JohnDoe";
-    string passwordTest02 = "na' OR 'x' = 'x";
     cout << endl
-         << "TEST CASE 02" << endl
+         << "TEST CASE 01" << endl
+		 << "------------" << endl
+		 << "Type of attack: None" << endl
+         << "Mitigation: Strong" << endl
+         << "Expected Result: There is no attack so there should be no attack detected." 
+         <<endl << endl;
+        if(strongMitigation(usernameTestNoAttack, passwordTestNoAttack))
+            generateSQLStatement(usernameTestNoAttack, passwordTestNoAttack);
+        else
+            cout << "Attack detected" << endl;
+    // END OF TEST CASE 2
+    
+    // TEST CASE 3
+    string usernameTestTuatologAttack = "John";
+    string passwordTestTuatologyAttack = "na' OR 'x' = 'x";
+    cout << endl
+         << "TEST CASE 03" << endl
 		 << "------------" << endl
 		 << "Type of attack: Tautology" << endl
          << "Mitigation: Weak" << endl
          << "Expected Result: The system will detect the attack." <<endl << endl;
-    if(weakMitigation(usernameTest02,passwordTest02))
-        generateSQLStatement(usernameTest02, passwordTest02);
+    if(weakMitigation(usernameTestTuatologAttack,passwordTestTuatologyAttack))
+        generateSQLStatement(usernameTestTuatologAttack, passwordTestTuatologyAttack);
     else
         cout << "Attack detected" << endl;
-    // END OF TEST CASE 1
+    // END OF TEST CASE 3
+   
+    // TEST CASE 4
+    cout << endl
+         << "TEST CASE 04" << endl
+		 << "------------" << endl
+		 << "Type of attack: Tautology" << endl
+         << "Mitigation: Strong" << endl
+         << "Expected Result: The system will detect the attack." <<endl << endl;
+    if(strongMitigation(usernameTestTuatologAttack,passwordTestTuatologyAttack))
+        generateSQLStatement(usernameTestTuatologAttack, passwordTestTuatologyAttack);
+    else
+        cout << "Attack detected" << endl;
+    // END OF TEST CASE 4
+
    
 
 
