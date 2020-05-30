@@ -47,6 +47,16 @@ bool weakMitigation(string username, string password){
         // See if a ' has been encountered.
         if (password[i] == '\'')
             return false;
+
+        // mitigate union attack
+        if (i < password.length() - 5) {
+           if ((password[i] == 'U' || password[i] == 'u') &&
+              (password[i+1] == 'N' || password[i+1] == 'n') && 
+              (password[i+2] == 'I' || password[i+2] == 'i') && 
+              (password[i+3] == 'O' || password[i+3] == 'o') && 
+              (password[i+4] == 'N' || password[i+4] == 'n'))
+              return false;
+        }
     }
 
     // Loop through the username strings to search for problem charater
@@ -54,6 +64,16 @@ bool weakMitigation(string username, string password){
         // See if a ' has been encountered.
         if (username[i] == '\'')
             return false;
+
+        // mitigate union attack
+        if (i < username.length() - 5) {
+           if ((username[i] == 'U' || username[i] == 'u') &&
+              (username[i + 1] == 'N' || username[i + 1] == 'n') &&
+              (username[i + 2] == 'I' || username[i + 2] == 'i') &&
+              (username[i + 3] == 'O' || username[i + 3] == 'o') &&
+              (username[i + 4] == 'N' || username[i + 4] == 'n'))
+              return false;
+        }
     }
     return true;
 }
