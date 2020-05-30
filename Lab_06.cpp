@@ -45,12 +45,8 @@ bool weakMitigation(string username, string password){
     // Loop through the password strings to search for problem charater
     for (int i = 0; i < password.length(); i++){
         // See if a ' has been encountered.
-        if (password[i] == '\'')
+        if (password[i] == '\'' || password[i] == ';' || password[i] == '-' || password[i] == ' ')
             return false;
-
-        // mitigate additional statement attack
-        if (password[i] == ';')
-           return false;
 
         // mitigate union attack
         if (i < password.length() - 5) {
@@ -73,11 +69,12 @@ bool weakMitigation(string username, string password){
 
     // Loop through the username strings to search for problem charater
     for (int i = 0; i < username.length(); i++){
-        // See if a ' has been encountered.
-        if (username[i] == '\'')
+        // See if any dangerous characters has been encountered. 
+        // Mitigates comment, tautology, and additional statement attacks
+        if (username[i] == '\'' || username[i] == ';' || username[i] == '-' || username[i] == ' '))
             return false;
 
-        // mitigate union attack
+        // mitigate union query attack
         if (i < username.length() - 5) {
            if ((username[i] == 'U' || username[i] == 'u') &&
               (username[i + 1] == 'N' || username[i + 1] == 'n') &&
