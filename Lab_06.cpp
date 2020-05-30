@@ -48,6 +48,10 @@ bool weakMitigation(string username, string password){
         if (password[i] == '\'')
             return false;
 
+        // mitigate additional statement attack
+        if (password[i] == ';')
+           return false;
+
         // mitigate union attack
         if (i < password.length() - 5) {
            if ((password[i] == 'U' || password[i] == 'u') &&
@@ -55,6 +59,14 @@ bool weakMitigation(string username, string password){
               (password[i+2] == 'I' || password[i+2] == 'i') && 
               (password[i+3] == 'O' || password[i+3] == 'o') && 
               (password[i+4] == 'N' || password[i+4] == 'n'))
+              return false;
+        }
+
+        // mitigate comment attack
+        if (i < password.length() - 1) {
+           if (password[i] == '/' && password[i+1] == '*')
+              return false;
+           if (password[i] == '-' && password[i + 1] == '-')
               return false;
         }
     }
