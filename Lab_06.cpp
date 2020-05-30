@@ -138,7 +138,33 @@ int main(){
         cout << "Attack detected" << endl;
     // END OF TEST CASE 4
 
-   
+    // TEST CASE 5
+    string usernameTestAdditionalStatementAttack = "Bob";
+    string passwordTestAdditionalStatementAttack = "na'; INSERT INTO passwordList (name, passwd) VALUES 'Adam', '1234";
+    cout << endl
+         << "TEST CASE 05" << endl
+		 << "------------" << endl
+		 << "Type of attack: Additional Statement" << endl
+         << "Mitigation: Weak" << endl
+         << "Expected Result: The system will detect the attack." <<endl << endl;
+    if(weakMitigation(usernameTestAdditionalStatementAttack,passwordTestAdditionalStatementAttack))
+        generateSQLStatement(usernameTestAdditionalStatementAttack, passwordTestAdditionalStatementAttack);
+    else
+        cout << "Attack detected" << endl;
+    // END OF TEST CASE 5
+
+    // TEST CASE 6
+    cout << endl
+         << "TEST CASE 06" << endl
+		 << "------------" << endl
+		 << "Type of attack: Additional Statement" << endl
+         << "Mitigation: Strong" << endl
+         << "Expected Result: The system will detect the attack." <<endl << endl;
+    if(strongMitigation(usernameTestAdditionalStatementAttack,passwordTestAdditionalStatementAttack))
+        generateSQLStatement(usernameTestAdditionalStatementAttack, passwordTestAdditionalStatementAttack);
+    else
+        cout << "Attack detected" << endl;
+    // END OF TEST CASE 6
 
 
     strongMitigation("1","2");
