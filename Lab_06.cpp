@@ -11,6 +11,23 @@ void generateSQLStatement(string userName, string password){
     return;
 }
 
+/*Function: Query a "database" of usernames and passwords.
+* Description : builds a dozen queries to test username and
+*password combinations in the SQL query.*/
+void testQueries() {
+    // The whitelists for the representation of the "database"
+    string whiteListUsername[12] = { "John", "Bob", "Joe", "Bill",
+        "John123", "Bob02_2", "Joe_12", "Bill321", "Grace", "FredRTSD",
+        "JoeJoe1984", "Barney" };
+    string whiteListPassword[12] = { "password","1234","colorado113",
+        "123@4!a", "password_1234","1a2b3c4d","utah1847","rosebud", "filagree123",
+        "this_is_SPARTA","ncc_1701a","3k_4534kjlg_44tkn" };
+    for (int i = 0; i < 12; i++) {
+        generateSQLStatement(whiteListUsername[i], whiteListPassword[i]);
+    }
+    return;
+}
+
 /*  Function: Strong Mitigation
 *   Description: Receives two strings as parameters. Comapares these strings
 *                to a white list to prevent SQL injection attacks.
@@ -64,7 +81,7 @@ bool weakMitigation(string username, string password){
     for (int i = 0; i < username.length(); i++){
         // See if any dangerous characters has been encountered. 
         // Mitigates comment, tautology, and additional statement attacks
-        if (username[i] == '\'' || username[i] == ';' || username[i] == '-' || username[i] == ' '))
+        if (username[i] == '\'' || username[i] == ';' || username[i] == '-' || username[i] == ' ')
             return false;
 
         // mitigate union query attack
