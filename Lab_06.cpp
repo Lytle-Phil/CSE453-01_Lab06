@@ -98,7 +98,7 @@ int main(){
 
     // TEST CASE 2
     cout << endl
-         << "TEST CASE 01" << endl
+         << "TEST CASE 02" << endl
 		 << "------------" << endl
 		 << "Type of attack: None" << endl
          << "Mitigation: Strong" << endl
@@ -144,5 +144,3 @@ int main(){
     strongMitigation("1","2");
     return 0;
 }
-
-// These changes
