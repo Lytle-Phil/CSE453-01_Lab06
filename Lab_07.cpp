@@ -66,6 +66,7 @@ void one(long number)               // 234567
    cout << "one() : " << (void *)one << endl;
    cout << "\tmessage: " << (void *)failMessage << endl;
    cout << "\tfail():  " << (void *)fail        << endl;
+   cout << "\tpass():  " << (void *)pass        << endl;
 
    two(number + 111111);    // 345678
 }
@@ -84,42 +85,68 @@ void two(long number)              // 345678
    // header for our table. Use these setw() offsets in your table
    cout << '[' << setw(2) << 'i' << ']'
         << setw(15) << "address"
-        << setw(20) << "hexadecimal"
-        << setw(20) << "decimal"
+        << setw(25) << "hexadecimal"
+        << setw(30) << "decimal"
         << setw(18) << "characters"
         << endl;
    cout << "----+"
         << "---------------+"
-        << "-------------------+"
-        << "-------------------+"
+        << "------------------------+"
+        << "-----------------------------+"
         << "-----------------+\n";
-   for (long i = 24; i >= -4; i--)   // You may need to change 24 to another number
+   for (long i = 32; i >= -4; i--)   // You may need to change 24 to another number
    {
       //the local variable bow is to be used as index 0
       ////////////////////////////////////////////////
       // Insert code here to display the callstack
-      cout << "[" << setw(2) << i << "]"
-           << setw(15) << &(*(pLong + (i * 2)))  //0x61fe88
-           << setw(20) << hex << *(pLong + (i * 2)) 
-           << setw(20) << dec << *(pLong + (i * 2))
+          cout << "[" << setw(2) << i << "]"
+           << setw(15) << &(*(pLong + (i)))  //0x61fe88
+           << setw(25) << hex << *(pLong + (i)) 
+           << setw(30) << dec << *(pLong + (i))
            << setw(18) << displayCharArray(pChar + ((i+1)* 8))
            << endl;
-      
+
+     //  cout << *(pLong + i) << endl;
       //
       ////////////////////////////////////////////////
    }
 
    ////////////////////////////////////////////////
    // Insert code here to change the variables in main()
-                                                                                
-   // change text in main() to "*main**"
+   
+   for(long i = 128; i >= -8; i--)
+   {
+      // change text in main() to "*main**"
+      if(displayCharArray(pChar + i) == " * M A I N * * .")
+      {
+         *(pChar + i + 1) = 'm';
+         *(pChar + i + 2) = 'a';
+         *(pChar + i + 3) = 'i';
+         *(pChar + i + 4) = 'n';
+               
+      }
 
-   // change number in main() to 654321
-
-   // change pointerFunction in main() to point to pass
-
-   // change message in main() to point to passMessage
+      // change number in main() to 654321
+      if(*(pLong + i) == 123456)
+      {
+         *(pLong + i) = 654321;        
+      }
+      
+      // change pointerFunction in main() to point to pass      
+      if (*(pLong + i) == (long)(void *)fail)
+      {
+         *(pLong + i) = (long)(void *)pass;
+      } 
+      
+      // change message in main() to point to passMessage      
+      if (*(pLong + i) == (long)(void*)failMessage)
+      {
+         *(pLong + i) = (long)(void*)passMessage;
+      } 
+      
+   }
 
    //
    ////////////////////////////////////////////////
+   return;
 }
